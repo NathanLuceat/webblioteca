@@ -15,7 +15,16 @@ Route::get('/livros', [LivroController::class, 'index']);
 Route::get('/livros/{id}', [LivroController::class, 'show']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $emprestimosAtivos = \App\Models\Emprestimo::where('usuario_id', auth()->id())
+        ->whereNull('data_devolucao')
+        ->count();
+
+    $reservasAtivas = \App\Models\ReservaSala::where('usuario_id', auth()->id())->count();
+
+    return view('dashboard', [
+        'emprestimosAtivos' => $emprestimosAtivos,
+        'reservasAtivas' => $reservasAtivas,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
