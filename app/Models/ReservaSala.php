@@ -19,4 +19,24 @@ class ReservaSala extends Model
     {
         return $this->belongsTo(Sala::class);
     }
+
+    public static function blocosDisponiveis(): array
+    {
+        $blocos = [];
+        for ($hora = 6; $hora < 18; $hora++) {
+            $inicio = sprintf('%02d:00', $hora);
+            $fim = sprintf('%02d:00', $hora + 1);
+            $blocos[$inicio . '-' . $fim] = [$inicio, $fim];
+        }
+        return $blocos;
+    }
+
+    public static function diasPermitidos(): array
+    {
+        return [
+            now()->toDateString() => 'Hoje (' . now()->format('d/m') . ')',
+            now()->addDay()->toDateString() => 'Amanhã (' . now()->addDay()->format('d/m') . ')',
+            now()->addDays(2)->toDateString() => 'Depois de amanhã (' . now()->addDays(2)->format('d/m') . ')',
+        ];
+    }
 }

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Catálogo de Livros — Webblioteca</title>
 </head>
+
 <body>
+    <a href="/meus-emprestimos">Meus Empréstimos</a>
     <h1>Catálogo de Livros</h1>
 
     <ul>
@@ -17,4 +20,5 @@
         @endforeach
     </ul>
 </body>
+
 </html>
