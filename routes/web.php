@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\EmprestimoController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ReservaController;
@@ -46,6 +47,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/minhas-reservas', [ReservaController::class, 'index'])->name('reservas.index');
     Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
     Route::post('/reservas/{reserva}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'painel'])->name('painel');
+    Route::get('/livros', [AdminController::class, 'livrosForm'])->name('livros.form');
+    Route::post('/livros', [AdminController::class, 'livrosStore'])->name('livros.store');
+    Route::get('/salas', [AdminController::class, 'salasForm'])->name('salas.form');
+    Route::post('/salas', [AdminController::class, 'salasStore'])->name('salas.store');
+    Route::get('/reservas', [AdminController::class, 'reservas'])->name('reservas');
 });
 
 require __DIR__.'/auth.php';

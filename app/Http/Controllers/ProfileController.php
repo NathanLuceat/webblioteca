@@ -48,6 +48,11 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        // Impede que o admin exclua a própria conta
+        if ($user->is_admin) {
+            return Redirect::route('profile.edit')->with('error', 'A conta de administrador não pode ser excluída.');
+        }
+
         Auth::logout();
 
         $user->delete();

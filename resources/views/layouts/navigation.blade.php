@@ -33,6 +33,13 @@
                     <x-nav-link :href="route('reservas.index')" :active="request()->routeIs('reservas.index')">
                         Minhas Reservas
                     </x-nav-link>
+                    @auth
+                        @if (Auth::user()->is_admin)
+                            <x-nav-link :href="route('admin.painel')" :active="request()->routeIs('admin.*')">
+                                Painel
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -128,6 +135,13 @@
             <x-responsive-nav-link :href="route('reservas.index')" :active="request()->routeIs('reservas.index')">
                 Minhas Reservas
             </x-responsive-nav-link>
+            @auth
+                @if (Auth::user()->is_admin)
+                    <x-responsive-nav-link :href="route('admin.painel')" :active="request()->routeIs('admin.*')">
+                        Painel
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         @auth

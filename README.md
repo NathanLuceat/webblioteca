@@ -1,58 +1,389 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Webblioteca
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Sistema de gerenciamento de biblioteca com empréstimo de livros e reserva de salas de estudo
 
-## About Laravel
+**Webblioteca** é um projeto de portfólio desenvolvido em Laravel que demonstra modelagem relacional de banco de dados, autenticação de usuários, e lógica de negócio para gerenciamento de biblioteca. O sistema oferece duas funcionalidades principais: controle de empréstimos de exemplares físicos e agendamento de salas de estudo.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Índice
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias](#-tecnologias)
+- [Requisitos](#-requisitos)
+- [Instalação](#-instalação)
+- [Credenciais de Acesso](#-credenciais-de-acesso)
+- [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
+- [Regras de Negócio](#-regras-de-negócio)
+- [Painel Administrativo](#-painel-administrativo)
+- [Testes](#-testes)
+- [Timezone](#-timezone)
+- [Documentação Técnica](#-documentação-técnica)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Funcionalidades
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Para Usuários
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- **Autenticação completa** — cadastro, login, recuperação de senha via Laravel Breeze
+- **Catálogo de livros** — navegação e consulta de disponibilidade de exemplares
+- **Empréstimos** — solicitação de empréstimo de livros disponíveis (prazo: 7 dias)
+- **Devolução** — registro de devolução de livros emprestados
+- **Reserva de salas** — agendamento de salas de estudo por blocos de 1 hora
+- **Gerenciamento pessoal** — visualização de empréstimos ativos e reservas futuras
 
-## Agentic Development
+### Para Administradores
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- **Painel administrativo** — acesso exclusivo via `/admin`
+- **Cadastro temporário** — adição de livros e salas para demonstração (expiram em 24h)
+- **Monitoramento** — visualização de todas as reservas de salas do sistema
+- **Conta protegida** — impossibilidade de alterar credenciais ou excluir a conta admin
+
+---
+
+## 🛠 Tecnologias
+
+| Camada | Tecnologia |
+|--------|-----------|
+| **Backend** | Laravel 11 (PHP 8.5) |
+| **Banco de Dados** | MySQL 8.4 |
+| **Frontend** | Blade Templates + Tailwind CSS |
+| **Autenticação** | Laravel Breeze (stack Blade + Alpine.js) |
+| **Ambiente** | Docker via Laravel Sail |
+| **Testes** | PHPUnit 12 (32 testes, 83 assertions) |
+
+---
+
+## 📦 Requisitos
+
+- **Docker Desktop** (Windows/Mac) ou **Docker Engine** (Linux)
+- **WSL 2** (apenas Windows)
+- **Git**
+
+O Laravel Sail gerencia todas as dependências (PHP, MySQL, Node, Composer) dentro de containers Docker, eliminando a necessidade de instalá-las localmente.
+
+---
+
+## 🚀 Instalação
+
+### 1. Clone o repositório
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <url-do-repositorio>
+cd webblioteca
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Configure o ambiente
 
-## Contributing
+```bash
+cp .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Inicie os containers
 
-## Code of Conduct
+```bash
+./vendor/bin/sail up -d
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+O comando acima irá:
+- Baixar e construir as imagens Docker necessárias
+- Iniciar os serviços (Laravel, MySQL, Redis, Mailpit, etc.)
+- Expor a aplicação em `http://localhost`
 
-## Security Vulnerabilities
+### 4. Instale as dependências e prepare o banco
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+./vendor/bin/sail composer install
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate:fresh --seed
+```
 
-## License
+O comando `migrate:fresh --seed` irá:
+- Criar todas as tabelas do banco de dados
+- Popular o banco com:
+  - 10 livros (cada um com exemplares variados)
+  - 5 salas de estudo
+  - 1 conta de administrador
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Acesse a aplicação
+
+Abra o navegador em **http://localhost**
+
+---
+
+## 🔐 Credenciais de Acesso
+
+### Conta de Administrador
+
+| Campo | Valor |
+|-------|-------|
+| **E-mail** | `admin@admin.com` |
+| **Senha** | `admin@webblioteca` |
+| **Acesso** | http://localhost/admin |
+
+> **⚠️ Proteção da Conta Admin**
+> 
+> Por segurança, a conta de administrador possui restrições especiais:
+> - ❌ Não pode alterar o próprio nome
+> - ❌ Não pode alterar o próprio e-mail
+> - ❌ Não pode alterar a própria senha
+> - ❌ Não pode excluir a própria conta
+> 
+> Essas restrições garantem a integridade do acesso administrativo ao sistema.
+
+### Criar Conta de Usuário
+
+Novos usuários podem se cadastrar em **http://localhost/register**
+
+---
+
+## 🗄 Estrutura do Banco de Dados
+
+### Diagrama de Relacionamentos
+
+```
+users (1) ────┬──── (N) emprestimos
+              │
+              └──── (N) reservas_salas
+              
+livros (1) ──── (N) exemplares (1) ──── (N) emprestimos
+
+salas (1) ──── (N) reservas_salas
+```
+
+### Tabelas Principais
+
+| Tabela | Descrição | Campos Principais |
+|--------|-----------|-------------------|
+| **users** | Usuários do sistema | `id`, `name`, `email`, `password`, `is_admin` |
+| **livros** | Catálogo de títulos | `id`, `titulo`, `autor`, `categoria`, `ano_publicacao`, `temporario` |
+| **exemplares** | Cópias físicas dos livros | `id`, `livro_id`, `codigo_patrimonio`, `status` |
+| **salas** | Salas de estudo disponíveis | `id`, `nome`, `capacidade`, `localizacao`, `temporario` |
+| **emprestimos** | Registro de empréstimos | `id`, `usuario_id`, `exemplar_id`, `data_emprestimo`, `data_devolucao` |
+| **reservas_salas** | Agendamentos de salas | `id`, `usuario_id`, `sala_id`, `data`, `hora_inicio`, `hora_fim` |
+
+### Status dos Exemplares
+
+- `disponivel` — pode ser emprestado
+- `emprestado` — em posse de um usuário
+
+---
+
+## 📜 Regras de Negócio
+
+### Empréstimos
+
+- ✅ Prazo fixo de **7 dias corridos**
+- ✅ Apenas exemplares com status `disponivel` podem ser emprestados
+- ✅ Apenas o próprio usuário pode devolver seus empréstimos
+- ✅ Um exemplar emprestado fica indisponível para outros usuários
+
+### Reservas de Salas
+
+- ✅ **Dias permitidos:** hoje, amanhã e depois de amanhã
+- ✅ **Horários disponíveis:** 12 blocos de 1 hora entre 06:00 e 18:00
+- ✅ **Limite por usuário:** máximo 3 blocos por dia, por sala
+- ✅ **Conflitos:** 
+  - Uma sala não pode ter duas reservas no mesmo horário
+  - Um usuário não pode ter duas reservas (em salas diferentes) no mesmo horário
+- ✅ **Limpeza automática:** reservas expiradas são removidas ao carregar qualquer página
+
+---
+
+## 🎛 Painel Administrativo
+
+### Acesso
+
+1. Faça login com a conta administrativa
+2. Acesse **http://localhost/admin**
+3. Ou clique no link **"Painel"** no menu superior (visível apenas para admins)
+
+### Funcionalidades
+
+| Recurso | Descrição |
+|---------|-----------|
+| **Dashboard** | Visão geral com cards de navegação |
+| **Cadastrar Livros** | Adiciona título, autor, categoria, ano e quantidade de exemplares |
+| **Cadastrar Salas** | Adiciona nome, capacidade e localização |
+| **Ver Reservas** | Lista todas as reservas de todos os usuários |
+
+### Registros Temporários
+
+Livros e salas cadastrados pelo painel administrativo são marcados como **temporários** e possuem as seguintes características:
+
+- ⏰ **Expiração:** removidos automaticamente após 24 horas da criação
+- 🔄 **Limpeza:** executada via middleware `LimpezaAutomatica` a cada requisição web
+- 🎯 **Propósito:** demonstração e testes sem poluir o banco de dados permanente
+
+> **💡 Nota:** Livros e salas criados pelos seeders são marcados como permanentes (`temporario = false`) e nunca são removidos automaticamente.
+
+### Segurança
+
+- 🔒 Todas as rotas `/admin/*` exigem autenticação **e** privilégio de administrador
+- 🚫 Usuários comuns recebem erro **403 Forbidden** ao tentar acessar o painel
+- ✅ Middleware `EhAdmin` verifica a flag `is_admin` em cada requisição
+
+---
+
+## 🧪 Testes
+
+O projeto possui uma suíte completa de testes automatizados.
+
+### Executar Todos os Testes
+
+```bash
+./vendor/bin/sail artisan test
+```
+
+**Resultado esperado:**
+```
+Tests:    32 passed (83 assertions)
+Duration: ~5s
+```
+
+### Testes do Painel Administrativo
+
+```bash
+./vendor/bin/sail artisan test --filter=AdminPanelFeatureTest
+```
+
+**Cobertura:**
+- ✅ Usuário comum recebe 403 ao acessar `/admin`
+- ✅ Admin acessa todas as páginas do painel
+- ✅ Admin cadastra livro com exemplares temporários
+- ✅ Admin cadastra sala temporária
+- ✅ Limpeza remove livros/salas temporários após 24h
+- ✅ Limpeza remove reservas expiradas de todos os usuários
+
+---
+
+## 🌍 Timezone
+
+O sistema opera no fuso horário **America/Sao_Paulo** (UTC-3 / Horário de Brasília).
+
+### Configuração
+
+A configuração está em `config/app.php`:
+
+```php
+'timezone' => 'America/Sao_Paulo',
+```
+
+### Por Que Isso Importa?
+
+O cálculo de expiração de reservas depende do timezone correto:
+
+- ❌ Com `UTC`, reservas do dia podem ser consideradas expiradas prematuramente
+- ✅ Com `America/Sao_Paulo`, a validação de horários funciona corretamente
+
+Se você alterar o timezone, limpe o cache:
+
+```bash
+./vendor/bin/sail artisan config:clear
+```
+
+---
+
+## 📖 Documentação Técnica
+
+Para informações detalhadas sobre a arquitetura, controllers, rotas e metodologia de desenvolvimento, consulte:
+
+- **[CLAUDE.md](./CLAUDE.md)** — documentação técnica completa do projeto
+
+### Conteúdo do CLAUDE.md
+
+- Schema completo do banco de dados com relacionamentos
+- Descrição de todos os Models Eloquent
+- Listagem de rotas e seus controllers
+- Regras de validação e lógica de negócio
+- Metodologia para adicionar funcionalidades
+- Histórico de implementações
+
+---
+
+## 🎨 Design System
+
+O projeto utiliza um design system customizado com:
+
+- **Paleta de cores:** leather, ink, folio, brass, paper
+- **Tipografia:** fonte display + fonte corpo com hierarquia clara
+- **Componentes:** card, paper-grain, label-overline, btn-primary, btn-outline
+- **Shadows:** stamp, emboss, folio
+- **Layout:** Tailwind CSS com tokens customizados
+
+Todos os componentes seguem o padrão visual definido em `resources/css/app.css`.
+
+---
+
+## 🤝 Comandos Úteis
+
+### Gerenciamento de Containers
+
+```bash
+# Iniciar containers em segundo plano
+./vendor/bin/sail up -d
+
+# Parar containers
+./vendor/bin/sail down
+
+# Ver logs
+./vendor/bin/sail logs -f
+```
+
+### Artisan
+
+```bash
+# Executar migrations
+./vendor/bin/sail artisan migrate
+
+# Recriar banco do zero com seeders
+./vendor/bin/sail artisan migrate:fresh --seed
+
+# Ver rotas
+./vendor/bin/sail artisan route:list
+
+# Executar seeder específico
+./vendor/bin/sail artisan db:seed --class=AdminSeeder
+
+# Limpar caches
+./vendor/bin/sail artisan optimize:clear
+```
+
+### Composer
+
+```bash
+# Instalar dependências
+./vendor/bin/sail composer install
+
+# Atualizar dependências
+./vendor/bin/sail composer update
+```
+
+### Tinker (REPL)
+
+```bash
+# Abrir console interativo do Laravel
+./vendor/bin/sail artisan tinker
+```
+
+---
+
+## 📝 Licença
+
+Este é um projeto de portfólio para fins educacionais.
+
+O framework Laravel é open-source sob a licença [MIT](https://opensource.org/licenses/MIT).
+
+---
+
+## 💬 Suporte
+
+Para dúvidas técnicas sobre o Laravel:
+- [Documentação Oficial](https://laravel.com/docs)
+- [Laracasts](https://laracasts.com)
+- [Laravel Learn](https://laravel.com/learn)
+
+---
+
+**Desenvolvido com Laravel 11 + Breeze + Sail** 🚀

@@ -8,7 +8,12 @@ class Sala extends Model
 {
     protected $table = 'salas';
 
-    protected $fillable = ['nome', 'capacidade', 'localizacao'];
+    protected $fillable = ['nome', 'capacidade', 'localizacao', 'temporario'];
+
+    protected function casts(): array
+    {
+        return ['temporario' => 'boolean'];
+    }
 
     public function reservas()
     {

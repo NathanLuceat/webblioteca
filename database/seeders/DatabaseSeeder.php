@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LivroSeeder::class,
             SalaSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\EhAdmin;
+use App\Http\Middleware\LimpezaAutomatica;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
@@ -12,7 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->append(LimpezaAutomatica::class);
+        $middleware->alias([
+            'admin' => EhAdmin::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
