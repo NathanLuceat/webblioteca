@@ -9,6 +9,7 @@
 ## 📋 Índice
 
 - [Funcionalidades](#-funcionalidades)
+- [Prints do Projeto](#-prints-do-projeto)
 - [Tecnologias](#-tecnologias)
 - [Requisitos](#-requisitos)
 - [Instalação](#-instalação)
@@ -39,6 +40,23 @@
 - **Cadastro temporário** — adição de livros e salas para demonstração (expiram em 24h)
 - **Monitoramento** — visualização de todas as reservas de salas do sistema
 - **Conta protegida** — impossibilidade de alterar credenciais ou excluir a conta admin
+
+---
+
+## 📸 Prints do Projeto
+
+| | |
+|---|---|
+| **Landing Page** | **Cadastro** |
+| ![Landing Page](./.github/images/18-landing-page.png) | ![Cadastro](./.github/images/01-cadastro.png) |
+| **Dashboard do Usuário** | **Catálogo de Livros** |
+| ![Dashboard do Usuário](./.github/images/03-dashboard.png) | ![Catálogo de Livros](./.github/images/04-catalogo.png) |
+| **Detalhe do Livro** | **Salas de Estudo** |
+| ![Detalhe do Livro](./.github/images/05-livro-detalhe.png) | ![Salas de Estudo](./.github/images/08-salas-estudo.png) |
+| **Dashboard do Administrador** | **Reservas de Todos os Usuários** |
+| ![Dashboard Admin](./.github/images/10-dashboard-admin.png) | ![Reservas Admin](./.github/images/16-admin-reservas-todos.png) |
+
+> 🖼️ **Mais prints:** confira a **[galeria completa de prints](./PRINTS.md)** com as 18 capturas de tela, cada uma acompanhada de uma breve descrição.
 
 ---
 
