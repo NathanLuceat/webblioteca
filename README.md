@@ -72,7 +72,7 @@ O Laravel Sail gerencia todas as dependências (PHP, MySQL, Node, Composer) dent
 O repositório inclui o script **`setup.sh`**, que automatiza toda a configuração do ambiente em um único comando:
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/NathanLuceat/webblioteca.git
 cd webblioteca
 ./setup.sh
 ```
@@ -92,7 +92,7 @@ Se preferir executar cada etapa separadamente:
 #### 1. Clone o repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/NathanLuceat/webblioteca.git
 cd webblioteca
 ```
 
