@@ -11,8 +11,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/livros', [LivroController::class, 'index']);
-Route::get('/livros/{id}', [LivroController::class, 'show']);
+Route::get('/livros', [LivroController::class, 'index'])->name('livros.index');
+Route::get('/livros/{id}', [LivroController::class, 'show'])->name('livros.show');
 
 Route::get('/dashboard', function () {
     $emprestimosAtivos = \App\Models\Emprestimo::where('usuario_id', auth()->id())
@@ -34,18 +34,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/meus-emprestimos', [EmprestimoController::class, 'index']);
-    Route::post('/emprestimos', [EmprestimoController::class, 'store']);
-    Route::post('/emprestimos/{emprestimo}/devolver', [EmprestimoController::class, 'devolver']);
+    Route::get('/meus-emprestimos', [EmprestimoController::class, 'index'])->name('emprestimos.index');
+    Route::post('/emprestimos', [EmprestimoController::class, 'store'])->name('emprestimos.store');
+    Route::post('/emprestimos/{emprestimo}/devolver', [EmprestimoController::class, 'devolver'])->name('emprestimos.devolver');
 });
 
-Route::get('/salas', [SalaController::class, 'index']);
-Route::get('/salas/{id}', [SalaController::class, 'show']);
+Route::get('/salas', [SalaController::class, 'index'])->name('salas.index');
+Route::get('/salas/{id}', [SalaController::class, 'show'])->name('salas.show');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/minhas-reservas', [ReservaController::class, 'index']);
-    Route::post('/reservas', [ReservaController::class, 'store']);
-    Route::post('/reservas/{reserva}/cancelar', [ReservaController::class, 'cancelar']);
+    Route::get('/minhas-reservas', [ReservaController::class, 'index'])->name('reservas.index');
+    Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
+    Route::post('/reservas/{reserva}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
 });
 
 require __DIR__.'/auth.php';

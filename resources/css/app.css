@@ -1,3 +1,233 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ————————————————————————————————
+   Webblioteca — Grande Biblioteca
+   Papel, couro e latão — folhas de catálogo
+   ———————————————————————————————— */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-paper text-ink antialiased;
+        background-image:
+            radial-gradient(circle at 20% 0%, rgba(201, 164, 92, 0.06), transparent 42%),
+            radial-gradient(circle at 90% 12%, rgba(126, 46, 30, 0.05), transparent 40%);
+        background-attachment: fixed;
+    }
+
+    /* Furinho de papel: grão muito sutil sobre superfícies claras */
+    .paper-grain::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        opacity: 0.5;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    h1, h2, h3, h4 {
+        @apply font-display text-ink;
+    }
+
+    ::selection {
+        background: #A97F2F;
+        color: #FDFAF2;
+    }
+}
+
+@layer components {
+    /* ——— Regra ornamental (linha dupla de catálogo) ——— */
+    .rule-ornament {
+        position: relative;
+        height: 7px;
+    }
+    .rule-ornament::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; top: 50%;
+        height: 1px;
+        background: linear-gradient(to right, #C4B18C, #C4B18C 96%, transparent);
+    }
+    .rule-ornament::before {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 1px;
+        background: repeating-linear-gradient(90deg, #D9CBAD 0 6px, transparent 6px 11px);
+    }
+    .rule-ornament .ornament-mark {
+        position: absolute;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+        width: 26px; height: 26px;
+        background: #A97F2F;
+        color: #FBF6E9;
+        font-family: 'Fraunces', serif;
+        font-style: italic;
+        font-size: 15px;
+        line-height: 26px;
+        text-align: center;
+        border-radius: 9999px;
+        box-shadow: 0 0 0 3px #F2EBDA, 0 0 0 4px #C4B18C;
+        z-index: 1;
+    }
+
+    /* ——— Cartão tipo "ficha de catálogo" ——— */
+    .card {
+        @apply bg-paper-card border border-line shadow-folio relative;
+        border-radius: 4px;
+    }
+    .card-body {
+        @apply p-6 sm:p-8;
+    }
+
+    /* ——— Botões: tipografia de chapa, canto vivo (nada de pílula) ——— */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 px-4 py-2 font-display text-sm font-semibold tracking-wide uppercase;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+        cursor: pointer;
+        text-decoration: none;
+        line-height: 1.25;
+    }
+    .btn-primary {
+        @apply bg-leather text-paper-light border-leather-deep shadow-press;
+        letter-spacing: .045em;
+    }
+    .btn-primary:hover {
+        @apply bg-leather-deep;
+    }
+    .btn-primary:active {
+        box-shadow: inset 0 2px 4px rgba(46, 16, 10, .4);
+    }
+    .btn-outline {
+        @apply bg-transparent text-ink border-line-strong;
+    }
+    .btn-outline:hover {
+        @apply bg-paper-light border-ink;
+    }
+    .btn-green {
+        @apply bg-folio text-paper-light border-folio-deep shadow-press;
+        letter-spacing: .045em;
+    }
+    .btn-green:hover {
+        @apply bg-folio-deep;
+    }
+    .btn-ghost {
+        @apply bg-transparent text-ink-soft;
+    }
+    .btn-ghost:hover {
+        @apply text-ink bg-paper-alt;
+    }
+    a.btn:focus-visible,
+    button.btn:focus-visible,
+    button:focus-visible {
+        outline: 2px solid #A97F2F;
+        outline-offset: 2px;
+    }
+
+    /* ——— Etiqueta de pequenas capitais (rótulo de ficha) ——— */
+    .label-overline {
+        @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-faint;
+    }
+
+    /* ——— Selo de carimbo (estado: EMPRESTADO / DISPONÍVEL / ATIVO) ——— */
+    .stamp {
+        @apply inline-flex items-center gap-1.5 px-2.5 py-1 font-display text-[11px] font-semibold uppercase tracking-[0.14em] border;
+        border-radius: 2px;
+    }
+    .stamp-ok {
+        @apply text-folio border-folio/50 bg-folio/5;
+    }
+    .stamp-warn {
+        @apply text-brass-deep border-brass/50 bg-brass/5;
+    }
+    .stamp-danger {
+        @apply text-leather border-leather/45 bg-leather/5;
+    }
+    .stamp-neutral {
+        @apply text-ink-soft border-line-strong bg-paper-alt/60;
+    }
+
+    /* ——— Lombada de livro (visual que representa o exemplar) ——— */
+    .book-spine {
+        position: relative;
+        border-radius: 3px;
+        overflow: hidden;
+        border: 1px solid rgba(43, 36, 25, .22);
+    }
+    .book-spine::before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; left: 0;
+        width: 6px;
+        background: linear-gradient(90deg, rgba(43,36,25,.35), rgba(43,36,25,0));
+    }
+    .book-spine::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            repeating-linear-gradient(0deg, rgba(253,250,242,0.045) 0 1px, transparent 1px 3px);
+    }
+    .book-spine.binding-leather   { background: linear-gradient(135deg, #7E2E1E, #5E1F13 68%, #4A1810); }
+    .book-spine.binding-forest    { background: linear-gradient(135deg, #2F4535, #223325 68%, #1A2A20); }
+    .book-spine.binding-brass     { background: linear-gradient(135deg, #A97F2F, #82601F 68%, #6B4F14); }
+    .book-spine.binding-slate     { background: linear-gradient(135deg, #3E4A52, #2B343B 68%, #20272C); }
+    .book-spine.binding-berry     { background: linear-gradient(135deg, #6B2E3E, #4C1F2D 68%, #3A1722); }
+
+    /* ——— Moldura dupla (painel de ficha / ilustração) ——— */
+    .panel-frame {
+        position: relative;
+        border-radius: 4px;
+        border: 1px solid #C4B18C;
+        padding: 10px;
+    }
+    .panel-frame::before {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 1px solid #E5DAC2;
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+    /* ——— Campo de formulário (papel com sulco de escrita) ——— */
+    .input-paper {
+        @apply w-full border-line bg-paper-light text-ink shadow-stamp;
+        border-radius: 3px;
+        padding: .55rem .75rem;
+        transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    .input-paper:focus {
+        @apply border-brass outline-none;
+        box-shadow: 0 0 0 3px rgba(169, 127, 47, .18);
+    }
+    .checkbox-paper {
+        @apply rounded-[3px] border-line-strong text-leather shadow-stamp;
+    }
+    .checkbox-paper:focus {
+        @apply ring-brass;
+    }
+
+    /* ——— Tabela de inventário (linhas tracejadas de cadastro) ——— */
+    .table-folio {
+        @apply w-full text-sm;
+    }
+    .table-folio thead th {
+        @apply text-left pb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-faint border-b-2 border-line-strong;
+    }
+    .table-folio tbody td {
+        @apply py-3.5 border-b border-line-soft align-middle;
+    }
+    .table-folio tbody tr:hover td {
+        @apply bg-brass/5;
+    }
+}
