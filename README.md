@@ -67,20 +67,42 @@ O Laravel Sail gerencia todas as dependências (PHP, MySQL, Node, Composer) dent
 
 ## 🚀 Instalação
 
-### 1. Clone o repositório
+### ✅ Opção rápida — script `setup.sh`
+
+O repositório inclui o script **`setup.sh`**, que automatiza toda a configuração do ambiente em um único comando:
+
+```bash
+git clone <url-do-repositorio>
+cd webblioteca
+./setup.sh
+```
+
+O script irá, automaticamente:
+- Criar o arquivo `.env` a partir do `.env.example` (se ainda não existir)
+- Subir os containers Docker
+- Instalar as dependências do Composer
+- Gerar a chave da aplicação
+- Executar as migrations e seeders, aguardando o banco de dados ficar pronto
+- Exibir a mensagem **"Tudo pronto!"** com o endereço de acesso e as credenciais administrativas
+
+### 🛠 Opção manual — passo a passo
+
+Se preferir executar cada etapa separadamente:
+
+#### 1. Clone o repositório
 
 ```bash
 git clone <url-do-repositorio>
 cd webblioteca
 ```
 
-### 2. Configure o ambiente
+#### 2. Configure o ambiente
 
 ```bash
 cp .env.example .env
 ```
 
-### 3. Inicie os containers
+#### 3. Inicie os containers
 
 ```bash
 ./vendor/bin/sail up -d
@@ -91,7 +113,7 @@ O comando acima irá:
 - Iniciar os serviços (Laravel, MySQL, Redis, Mailpit, etc.)
 - Expor a aplicação em `http://localhost`
 
-### 4. Instale as dependências e prepare o banco
+#### 4. Instale as dependências e prepare o banco
 
 ```bash
 ./vendor/bin/sail composer install
@@ -106,7 +128,7 @@ O comando `migrate:fresh --seed` irá:
   - 5 salas de estudo
   - 1 conta de administrador
 
-### 5. Acesse a aplicação
+#### 5. Acesse a aplicação
 
 Abra o navegador em **http://localhost**
 
@@ -287,16 +309,18 @@ Se você alterar o timezone, limpe o cache:
 
 ## 📖 Documentação Técnica
 
-Para informações detalhadas sobre a arquitetura, controllers, rotas e metodologia de desenvolvimento, consulte:
+Para informações detalhadas sobre a arquitetura, controllers, rotas e estrutura do projeto, consulte:
 
-- **[CLAUDE.md](./CLAUDE.md)** — documentação técnica completa do projeto
+- **[Documentação Técnica](./DOCUMENTACAO-TECNICA.md)** — documentação completa do projeto para desenvolvimento
 
-### Conteúdo do CLAUDE.md
+### Conteúdo do documento
 
+- Stack técnica e configuração do ambiente
 - Schema completo do banco de dados com relacionamentos
 - Descrição de todos os Models Eloquent
 - Listagem de rotas e seus controllers
 - Regras de validação e lógica de negócio
+- Guia de views e do que pode ser alterado com segurança
 - Metodologia para adicionar funcionalidades
 - Histórico de implementações
 
