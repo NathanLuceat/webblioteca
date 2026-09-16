@@ -93,7 +93,7 @@ O repositório inclui o script **`setup.sh`**, que automatiza toda a configuraç
 ```bash
 git clone https://github.com/NathanLuceat/webblioteca.git
 cd webblioteca
-./setup.sh
+bash setup.sh
 ```
 
 O script irá, automaticamente:
