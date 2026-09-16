@@ -13,6 +13,7 @@
 - [Tecnologias](#-tecnologias)
 - [Requisitos](#-requisitos)
 - [Instalação](#-instalação)
+- [Possíveis Erros](#-possíveis-erros)
 - [Credenciais de Acesso](#-credenciais-de-acesso)
 - [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
 - [Regras de Negócio](#-regras-de-negócio)
@@ -149,6 +150,55 @@ O comando `migrate:fresh --seed` irá:
 #### 5. Acesse a aplicação
 
 Abra o navegador em **http://localhost**
+
+---
+
+## ⚠️ Possíveis Erros
+
+### Docker não inicia / WSL 2 não é reconhecido
+
+Se o Docker Desktop exibe erros como *"Docker Desktop requires WSL 2 backend"* ou *"WSL 2 installation is incomplete"*, verifique as duas configurações abaixo:
+
+#### 1. Ativar a Virtualização na BIOS/UEFI
+
+A virtualização de hardware (Intel **VT-x** ou AMD **SVM**) precisa estar habilitada na BIOS/UEFI do seu computador:
+
+1. Reinicie o computador e entre na BIOS/UEFI (geralmente pressionando `F2`, `F10` ou `Del` durante a inicialização)
+2. Procure por uma opção chamada **Intel Virtualization Technology (VT-x)**, **AMD-V** ou **SVM Mode** — geralmente em `Advanced` → `CPU Configuration`
+3. **Ative** a opção e salve as alterações
+4. Reinicie o computador
+
+> **⚠️** Se essa opção não estiver ativada, o WSL 2 **não funcionará**, impedindo o Docker de operar.
+
+#### 2. Ativar a Plataforma de Máquina Virtual no Windows
+
+Mesmo com a virtualização habilitada na BIOS, é necessário ativar o recurso de plataforma do WSL 2 no Windows:
+
+1. Abra **Painel de Controle** → **Programas** → **Ativar ou desativar recursos do Windows** (ou pressione `Win + R`, digite `optionalfeatures` e pressione Enter)
+2. Marque as seguintes opções:
+   - ✅ **Plataforma de Máquina Virtual** (*Virtual Machine Platform*)
+   - ✅ **Subsystem do Windows para Linux** (*Windows Subsystem for Linux*)
+3. Clique em **OK** e **reinicie** o computador
+
+> **⚠️** Ambas as opções precisam estar marcadas. Após a ativação, reinicie o computador antes de tentar usar o Docker novamente.
+
+### Verificando se tudo está configurado
+
+Após reiniciar, execute no PowerShell ou CMD:
+
+```powershell
+wsl --status
+```
+
+Se a saída indicar que o WSL 2 está ativo e a versão do kernel está atualizada, tudo está funcionando corretamente.
+
+### Outros erros comuns
+
+| Erro | Solução |
+|------|---------|
+| `Error response from daemon: Ports are not available` | Porta 80 já em uso — feche o programa que a utiliza ou altere a porta no arquivo `.env` |
+| `Could not connect to the Docker daemon` | O Docker Desktop não está em execução — inicie-o antes de rodar o Sail |
+| `No space left on device` | Limpe imagens e containers não utilizados com `docker system prune` |
 
 ---
 

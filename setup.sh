@@ -7,7 +7,7 @@ if [ ! -f .env ]; then
     cp .env.example .env
     echo "Arquivo .env criado a partir do .env.example"
 fi
-/b
+
 echo "Subindo os containers Docker..."
 docker compose up -d
 
