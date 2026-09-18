@@ -10,7 +10,8 @@ set -e
 #       Docker Desktop automaticamente e aguarda ele ficar pronto
 #    3. Cria o .env
 #    4. Recria os containers do projeto em estado limpo
-#    5. Instala dependências, gera a chave e popula o banco
+#    5. Ajusta permissões, instala dependências (PHP e Node),
+#       compila assets (Vite), gera a chave e popula o banco
 #    6. Valida e exibe o endereço de acesso
 # ============================================================
 
@@ -96,6 +97,7 @@ fi
 if [ ! -d "vendor/laravel/sail" ]; then
     echo "Pasta vendor/ ausente (clone novo) — instalando dependências via container temporário..."
     docker run --rm \
+        -u "$(id -u):$(id -g)" \
         -v "$(pwd):/app" \
         -w /app \
         composer:2 \
@@ -137,8 +139,11 @@ if [ "$(docker inspect -f '{{.State.Running}}' "$APP_CONTAINER" 2>/dev/null || e
 fi
 
 # ------------------------------------------------------------
-# 5. Chave da aplicação e banco de dados
+# 5. Permissões, chave da aplicação e banco de dados
 # ------------------------------------------------------------
+
+echo "Ajustando permissões de storage e bootstrap/cache..."
+docker compose exec -u root laravel.test chmod -R 777 storage bootstrap/cache
 
 echo "Gerando chave da aplicação..."
 docker compose exec laravel.test php artisan key:generate
@@ -148,6 +153,16 @@ until docker compose exec laravel.test php artisan migrate --seed; do
     echo "Banco ainda não está pronto, tentando novamente em 3s..."
     sleep 3
 done
+
+# ------------------------------------------------------------
+# 5.5. Instalação de pacotes Node e compilação de assets (Vite)
+# ------------------------------------------------------------
+echo ""
+echo "Instalando dependências de frontend (npm)..."
+docker compose exec laravel.test npm install --no-audit --no-fund
+
+echo "Compilando assets com Vite..."
+docker compose exec laravel.test npm run build
 
 # ------------------------------------------------------------
 # 6. Validação final

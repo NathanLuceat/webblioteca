@@ -99,7 +99,9 @@ bash setup.sh
 O script irá, automaticamente:
 - Criar o arquivo `.env` a partir do `.env.example` (se ainda não existir)
 - Subir os containers Docker
-- Instalar as dependências do Composer
+- Ajustar permissões dos diretórios `storage` e `bootstrap/cache`
+- Instalar as dependências do Composer e do Node.js (npm)
+- Compilar os assets do frontend com o Vite (`npm run build`)
 - Gerar a chave da aplicação
 - Executar as migrations e seeders, aguardando o banco de dados ficar pronto
 - Exibir a mensagem **"Tudo pronto!"** com o endereço de acesso e as credenciais administrativas
@@ -132,10 +134,12 @@ O comando acima irá:
 - Iniciar os serviços (Laravel, MySQL, Redis, Mailpit, etc.)
 - Expor a aplicação em `http://localhost`
 
-#### 4. Instale as dependências e prepare o banco
+#### 4. Instale as dependências, compile os assets e prepare o banco
 
 ```bash
 ./vendor/bin/sail composer install
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run build
 ./vendor/bin/sail artisan key:generate
 ./vendor/bin/sail artisan migrate:fresh --seed
 ```
