@@ -1,24 +1,24 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-ink">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-ink-soft">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
 
     @if (Auth::user()->is_admin)
-        <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <p class="text-sm text-gray-700">
+        <div class="mt-6 p-4 bg-paper-alt/70 rounded-lg border border-line-soft">
+            <p class="text-sm text-ink-soft">
                 <strong>Conta de Administrador Protegida</strong>
             </p>
-            <p class="mt-2 text-sm text-gray-600">
+            <p class="mt-2 text-sm text-ink-soft">
                 Por segurança, a conta de administrador não permite alteração de nome, email, senha ou exclusão da conta.
                 Estas opções estão desabilitadas para proteger a integridade do acesso administrativo.
             </p>
-            <p class="mt-2 text-sm text-gray-600">
+            <p class="mt-2 text-sm text-ink-soft">
                 Usuário atual: <strong>{{ Auth::user()->name }}</strong> ({{ Auth::user()->email }})
             </p>
         </div>
@@ -40,16 +40,16 @@
 
                 @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                     <div>
-                        <p class="text-sm mt-2 text-gray-800">
+                        <p class="text-sm mt-2 text-ink-soft">
                             {{ __('Your email address is unverified.') }}
 
-                            <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button form="send-verification" class="underline text-sm text-leather hover:text-leather-deep rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brass">
                                 {{ __('Click here to re-send the verification email.') }}
                             </button>
                         </p>
 
                         @if (session('status') === 'verification-link-sent')
-                            <p class="mt-2 font-medium text-sm text-green-600">
+                            <p class="mt-2 font-medium text-sm text-folio">
                                 {{ __('A new verification link has been sent to your email address.') }}
                             </p>
                         @endif
@@ -66,7 +66,7 @@
                         x-show="show"
                         x-transition
                         x-init="setTimeout(() => show = false, 2000)"
-                        class="text-sm text-gray-600"
+                        class="text-sm text-ink-soft"
                     >{{ __('Saved.') }}</p>
                 @endif
             </div>

@@ -9,6 +9,7 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
@@ -17,41 +18,41 @@ export default {
             },
             colors: {
                 paper: {
-                    DEFAULT: '#F2EBDA',
-                    alt: '#ECE3CD',
-                    card: '#FBF6E9',
-                    light: '#FDFAF2',
+                    DEFAULT: 'rgb(var(--color-paper) / <alpha-value>)',
+                    alt: 'rgb(var(--color-paper-alt) / <alpha-value>)',
+                    card: 'rgb(var(--color-paper-card) / <alpha-value>)',
+                    light: 'rgb(var(--color-paper-light) / <alpha-value>)',
                 },
                 ink: {
-                    DEFAULT: '#2B2419',
-                    soft: '#5C5243',
-                    faint: '#85785F',
+                    DEFAULT: 'rgb(var(--color-ink) / <alpha-value>)',
+                    soft: 'rgb(var(--color-ink-soft) / <alpha-value>)',
+                    faint: 'rgb(var(--color-ink-faint) / <alpha-value>)',
                 },
                 leather: {
-                    DEFAULT: '#7E2E1E',
-                    deep: '#5E1F13',
-                    light: '#9A4634',
+                    DEFAULT: 'rgb(var(--color-leather) / <alpha-value>)',
+                    deep: 'rgb(var(--color-leather-deep) / <alpha-value>)',
+                    light: 'rgb(var(--color-leather-light) / <alpha-value>)',
                 },
                 brass: {
-                    DEFAULT: '#A97F2F',
-                    deep: '#82601F',
-                    light: '#C9A45C',
+                    DEFAULT: 'rgb(var(--color-brass) / <alpha-value>)',
+                    deep: 'rgb(var(--color-brass-deep) / <alpha-value>)',
+                    light: 'rgb(var(--color-brass-light) / <alpha-value>)',
                 },
                 folio: {
-                    DEFAULT: '#2F4535',
-                    deep: '#223325',
-                    light: '#5C7854',
+                    DEFAULT: 'rgb(var(--color-folio) / <alpha-value>)',
+                    deep: 'rgb(var(--color-folio-deep) / <alpha-value>)',
+                    light: 'rgb(var(--color-folio-light) / <alpha-value>)',
                 },
                 line: {
-                    DEFAULT: '#D9CBAD',
-                    soft: '#E5DAC2',
-                    strong: '#C4B18C',
+                    DEFAULT: 'rgb(var(--color-line) / <alpha-value>)',
+                    soft: 'rgb(var(--color-line-soft) / <alpha-value>)',
+                    strong: 'rgb(var(--color-line-strong) / <alpha-value>)',
                 },
             },
             boxShadow: {
-                folio: '0 1px 0 rgba(43,36,25,.04), 0 6px 18px -8px rgba(43,36,25,.22)',
-                'folio-sm': '0 1px 0 rgba(43,36,25,.05), 0 3px 8px -4px rgba(43,36,25,.18)',
-                stamp: '0 1px 0 rgba(43,36,25,.06)',
+                folio: 'var(--shadow-folio)',
+                'folio-sm': 'var(--shadow-folio-sm)',
+                stamp: 'var(--shadow-stamp)',
                 press: 'inset 0 1px 2px rgba(94,31,19,.35), 0 1px 0 rgba(255,255,255,.12)',
             },
         },

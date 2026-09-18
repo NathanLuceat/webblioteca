@@ -145,6 +145,10 @@ fi
 echo "Ajustando permissões de storage e bootstrap/cache..."
 docker compose exec -u root laravel.test chmod -R 777 storage bootstrap/cache
 
+echo "Garantindo permissões do cache do PHPUnit (.phpunit.result.cache)..."
+docker compose exec -u root laravel.test touch .phpunit.result.cache 2>/dev/null || true
+docker compose exec -u root laravel.test chmod 666 .phpunit.result.cache 2>/dev/null || true
+
 echo "Gerando chave da aplicação..."
 docker compose exec laravel.test php artisan key:generate
 

@@ -7,7 +7,7 @@
                 <p class="text-ink-soft text-sm mt-2">A sala será removida automaticamente após 24 horas.</p>
 
                 @if ($errors->any())
-                    <div class="mt-6 rounded-sm border-l-4 border-red-700 bg-red-50 px-4 py-3 text-sm text-red-800">
+                    <div class="mt-6 rounded-sm border-l-4 border-leather-deep bg-leather/10 px-4 py-3 text-sm text-leather">
                         <p class="font-semibold">Verifique os campos abaixo.</p>
                         <ul class="mt-1 list-disc list-inside space-y-0.5">
                             @foreach ($errors->all() as $error)

@@ -43,9 +43,37 @@
                 </div>
             </div>
 
-            <!-- Perfil (logado) / Entrar (visitante) -->
+            <!-- Theme Toggle + Perfil (logado) / Entrar (visitante) -->
+            <div class="flex items-center gap-2 sm:ms-6">
+                <!-- Botão Theme Toggle -->
+                <button type="button"
+                        x-data="{
+                            dark: document.documentElement.classList.contains('dark'),
+                            toggle() {
+                                this.dark = !this.dark;
+                                if (this.dark) {
+                                    document.documentElement.classList.add('dark');
+                                    localStorage.theme = 'dark';
+                                } else {
+                                    document.documentElement.classList.remove('dark');
+                                    localStorage.theme = 'light';
+                                }
+                            }
+                        }"
+                        @click="toggle()"
+                        class="hidden sm:inline-flex p-2 rounded-[3px] border border-line-soft bg-paper-light/85 text-ink hover:text-ink hover:border-line-strong shadow-stamp transition"
+                        aria-label="Alternar tema">
+                    <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                    <svg x-show="dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+            </div>
+
             @auth
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <div class="flex items-center gap-2 px-3 py-2 border border-line-soft bg-paper-light/60 shadow-stamp text-sm text-ink-soft hover:text-ink hover:border-line-strong focus:outline-none transition ease-in-out duration-150 cursor-pointer">
@@ -147,9 +175,36 @@
         @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-line-soft">
-            <div class="px-4">
-                <div class="font-display text-base font-semibold text-ink">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-ink-soft">{{ Auth::user()->email }}</div>
+            <div class="px-4 flex items-center justify-between">
+                <div>
+                    <div class="font-display text-base font-semibold text-ink">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-ink-soft">{{ Auth::user()->email }}</div>
+                </div>
+                <!-- Theme Toggle Mobile -->
+                <button type="button"
+                        x-data="{
+                            dark: document.documentElement.classList.contains('dark'),
+                            toggle() {
+                                this.dark = !this.dark;
+                                if (this.dark) {
+                                    document.documentElement.classList.add('dark');
+                                    localStorage.theme = 'dark';
+                                } else {
+                                    document.documentElement.classList.remove('dark');
+                                    localStorage.theme = 'light';
+                                }
+                            }
+                        }"
+                        @click="toggle()"
+                        class="sm:hidden p-2 rounded-[3px] border border-line-soft bg-paper-light/60 text-ink-soft hover:text-ink hover:border-line-strong shadow-stamp transition"
+                        aria-label="Alternar tema">
+                    <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                    <svg x-show="dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
             </div>
 
             <div class="mt-3 space-y-1">

@@ -7,6 +7,69 @@
    Papel, couro e latão — folhas de catálogo
    ———————————————————————————————— */
 
+:root {
+    /* ——— Light Mode (Padrão) ——— */
+    --color-paper: 242 235 218;
+    --color-paper-alt: 236 227 205;
+    --color-paper-card: 251 246 233;
+    --color-paper-light: 253 250 242;
+    --color-ink: 43 36 25;
+    --color-ink-soft: 92 82 67;
+    --color-ink-faint: 133 120 95;
+    --color-leather: 126 46 30;
+    --color-leather-deep: 94 31 19;
+    --color-leather-light: 154 70 52;
+    --color-brass: 169 127 47;
+    --color-brass-deep: 130 96 31;
+    --color-brass-light: 201 164 92;
+    --color-folio: 47 69 53;
+    --color-folio-deep: 34 51 37;
+    --color-folio-light: 92 120 84;
+    --color-line: 217 203 173;
+    --color-line-soft: 229 218 194;
+    --color-line-strong: 196 177 140;
+    --shadow-folio: 0 1px 0 rgba(43,36,25,.04), 0 6px 18px -8px rgba(43,36,25,.22);
+    --shadow-folio-sm: 0 1px 0 rgba(43,36,25,.05), 0 3px 8px -4px rgba(43,36,25,.18);
+    --shadow-stamp: 0 1px 0 rgba(43,36,25,.06);
+}
+
+/* ——— Dark Mode (Contraste Aprimorado com Tons Marrom) ——— */
+.dark {
+    /* Fundos mais claros para melhor contraste */
+    --color-paper: 58 52 40;         /* #3A3428 - Marrom claro */
+    --color-paper-alt: 67 61 48;     /* #433D30 */
+    --color-paper-card: 75 68 53;    /* #4B4435 */
+    --color-paper-light: 244 232 204; /* creme claro (texto de livros + superfícies de input) */
+
+    /* Textos com alto contraste */
+    --color-ink: 245 240 229;        /* #F5F0E5 - Branco cremoso */
+    --color-ink-soft: 213 205 192;   /* #D5CDC0 - Prateado */
+    --color-ink-faint: 168 158 139;  /* #A89E8B - Marrom claro */
+
+    /* Acentos vibrantes e legíveis */
+    --color-leather: 212 128 101;    /* #D48065 - Couro claro */
+    --color-leather-deep: 179 101 80; /* #B36550 */
+    --color-leather-light: 232 154 127; /* #E89A7F */
+
+    --color-brass: 242 199 134;      /* #F2C786 - Latão dourado */
+    --color-brass-deep: 216 169 95;  /* #D8A95F */
+    --color-brass-light: 253 225 181; /* #FDE1B5 */
+
+    --color-folio: 144 193 148;      /* #90C194 - Verde floresta claro */
+    --color-folio-deep: 106 160 106; /* #6AA06A */
+    --color-folio-light: 180 215 183; /* #B4D7B7 */
+
+    /* Bordas visíveis */
+    --color-line: 138 130 112;       /* #8A8270 */
+    --color-line-soft: 112 104 87;   /* #706857 */
+    --color-line-strong: 168 158 139; /* #A89E8B */
+
+    /* Sombras mais fortes para profundidade */
+    --shadow-folio: 0 1px 0 rgba(0,0,0,.4), 0 6px 18px -8px rgba(0,0,0,.7);
+    --shadow-folio-sm: 0 1px 0 rgba(0,0,0,.35), 0 3px 8px -4px rgba(0,0,0,.55);
+    --shadow-stamp: 0 1px 0 rgba(0,0,0,.45);
+}
+
 @layer base {
     html {
         scroll-behavior: smooth;
@@ -18,6 +81,12 @@
             radial-gradient(circle at 20% 0%, rgba(201, 164, 92, 0.06), transparent 42%),
             radial-gradient(circle at 90% 12%, rgba(126, 46, 30, 0.05), transparent 40%);
         background-attachment: fixed;
+    }
+
+    .dark body {
+        background-image:
+            radial-gradient(circle at 20% 0%, rgba(201, 164, 92, 0.03), transparent 42%),
+            radial-gradient(circle at 90% 12%, rgba(138, 62, 45, 0.02), transparent 40%);
     }
 
     /* Furinho de papel: grão muito sutil sobre superfícies claras */
