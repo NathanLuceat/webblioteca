@@ -159,7 +159,11 @@ done
 # ------------------------------------------------------------
 echo ""
 echo "Instalando dependências de frontend (npm)..."
-docker compose exec laravel.test npm install --no-audit --no-fund
+docker compose exec -u root laravel.test npm install --no-audit --no-fund
+
+echo "Ajustando permissões dos binários e módulos..."
+docker compose exec -u root laravel.test chmod -R 777 node_modules public
+docker compose exec -u root laravel.test chmod -R +x node_modules/.bin
 
 echo "Compilando assets com Vite..."
 docker compose exec laravel.test npm run build
