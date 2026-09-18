@@ -87,6 +87,23 @@ if [ ! -f .env ]; then
 fi
 
 # ------------------------------------------------------------
+# 3.5. Instalar dependências ANTES de subir os containers
+#      (o docker-compose.yml do Sail precisa de vendor/laravel/sail
+#       para conseguir construir a imagem — em um clone novo essa
+#       pasta ainda não existe, então usamos um container
+#       descartável só para este passo)
+# ------------------------------------------------------------
+if [ ! -d "vendor/laravel/sail" ]; then
+    echo "Pasta vendor/ ausente (clone novo) — instalando dependências via container temporário..."
+    docker run --rm \
+        -v "$(pwd):/app" \
+        -w /app \
+        composer:2 \
+        composer install --ignore-platform-reqs --no-interaction
+    echo "✔ Dependências instaladas."
+fi
+
+# ------------------------------------------------------------
 # 4. Containers: recriar o projeto em estado limpo
 # ------------------------------------------------------------
 echo ""
@@ -115,8 +132,6 @@ fi
 # ------------------------------------------------------------
 # 5. Dependências, chave da aplicação e banco de dados
 # ------------------------------------------------------------
-echo "Instalando dependências do Composer..."
-docker compose exec laravel.test composer install
 
 echo "Gerando chave da aplicação..."
 docker compose exec laravel.test php artisan key:generate
