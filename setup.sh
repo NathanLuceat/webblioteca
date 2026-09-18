@@ -88,7 +88,7 @@ fi
 
 # ------------------------------------------------------------
 # 3.5. Instalar dependências ANTES de subir os containers
-#      (o docker-compose.yml do Sail precisa de vendor/laravel/sail
+#      (o compose.yaml do Sail precisa de vendor/laravel/sail
 #       para conseguir construir a imagem — em um clone novo essa
 #       pasta ainda não existe, então usamos um container
 #       descartável só para este passo)
@@ -108,6 +108,13 @@ fi
 # ------------------------------------------------------------
 echo ""
 echo "Subindo os containers Docker..."
+
+# O build da imagem precisa saber qual usuário/grupo do host usar.
+# Normalmente isso é feito pelo próprio ./vendor/bin/sail — como
+# chamamos o Docker Compose diretamente, exportamos manualmente.
+export WWWUSER=$(id -u)
+export WWWGROUP=$(id -g)
+
 docker compose down --remove-orphans >/dev/null 2>&1 || true
 docker compose up -d
 
@@ -130,7 +137,7 @@ if [ "$(docker inspect -f '{{.State.Running}}' "$APP_CONTAINER" 2>/dev/null || e
 fi
 
 # ------------------------------------------------------------
-# 5. Dependências, chave da aplicação e banco de dados
+# 5. Chave da aplicação e banco de dados
 # ------------------------------------------------------------
 
 echo "Gerando chave da aplicação..."
