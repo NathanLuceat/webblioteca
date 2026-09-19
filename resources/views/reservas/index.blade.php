@@ -56,7 +56,7 @@
                             <form action="{{ route('reservas.cancelar', $reserva->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" onclick="return confirm('Cancelar esta reserva?')"
-                                        class="btn btn-ghost w-full text-xs text-leather">
+                                        class="btn btn-ghost w-full text-xs dark:text-leather">
                                     Cancelar reserva
                                 </button>
                             </form>

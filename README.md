@@ -132,7 +132,7 @@ cp .env.example .env
 O comando acima irá:
 - Baixar e construir as imagens Docker necessárias
 - Iniciar os serviços (Laravel, MySQL, Redis, Mailpit, etc.)
-- Expor a aplicação em `http://localhost`
+- Expor a aplicação em `http://localhost:8678`
 
 #### 4. Instale as dependências, compile os assets e prepare o banco
 
@@ -153,7 +153,7 @@ O comando `migrate:fresh --seed` irá:
 
 #### 5. Acesse a aplicação
 
-Abra o navegador em **http://localhost**
+Abra o navegador em **http://localhost:8678**
 
 ---
 
@@ -214,7 +214,7 @@ Se a saída indicar que o WSL 2 está ativo e a versão do kernel está atualiza
 |-------|-------|
 | **E-mail** | `admin@admin.com` |
 | **Senha** | `admin@webblioteca` |
-| **Acesso** | http://localhost/admin |
+| **Acesso** | http://localhost:8678/admin |
 
 > **⚠️ Proteção da Conta Admin**
 > 
@@ -228,7 +228,7 @@ Se a saída indicar que o WSL 2 está ativo e a versão do kernel está atualiza
 
 ### Criar Conta de Usuário
 
-Novos usuários podem se cadastrar em **http://localhost/register**
+Novos usuários podem se cadastrar em **http://localhost:8678/register**
 
 ---
 
@@ -290,7 +290,7 @@ salas (1) ──── (N) reservas_salas
 ### Acesso
 
 1. Faça login com a conta administrativa
-2. Acesse **http://localhost/admin**
+2. Acesse **http://localhost:8678/admin**
 3. Ou clique no link **"Painel"** no menu superior (visível apenas para admins)
 
 ### Funcionalidades

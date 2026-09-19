@@ -35,7 +35,7 @@
                                 <div class="book-spine {{ $encadernacao }} w-2 shrink-0" aria-hidden="true"></div>
                                 <div class="flex-1 min-w-0">
                                     <h3 class="font-display text-lg font-semibold text-ink leading-tight">
-                                        <a href="{{ route('salas.show', $sala->id) }}" class="hover:text-leather transition-colors">
+                                        <a href="{{ route('salas.show', $sala->id) }}" class="hover:text-leather transition-colors dark:text-ink">
                                             {{ $sala->nome }}
                                         </a>
                                     </h3>
@@ -59,7 +59,7 @@
                                     </dl>
 
                                     <div class="mt-4 pt-4 border-t border-line-soft">
-                                        <a href="{{ route('salas.show', $sala->id) }}" class="btn btn-outline w-full text-xs">
+                                        <a href="{{ route('salas.show', $sala->id) }}" class="btn btn-outline w-full text-xs dark:!text-ink-faint">
                                             Reservar horário
                                         </a>
                                     </div>

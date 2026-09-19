@@ -61,7 +61,7 @@
                             }
                         }"
                         @click="toggle()"
-                        class="hidden sm:inline-flex p-2 rounded-[3px] border border-line-soft bg-paper-light/85 text-ink hover:text-ink hover:border-line-strong shadow-stamp transition"
+                        class="hidden sm:inline-flex p-2 rounded-[3px] border border-line-soft bg-paper-light/85 text-ink dark:text-ink-faint hover:text-ink dark:hover:text-ink-faint hover:border-line-strong shadow-stamp transition"
                         aria-label="Alternar tema">
                     <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -196,7 +196,7 @@
                             }
                         }"
                         @click="toggle()"
-                        class="sm:hidden p-2 rounded-[3px] border border-line-soft bg-paper-light/60 text-ink-soft hover:text-ink hover:border-line-strong shadow-stamp transition"
+                        class="sm:hidden p-2 rounded-[3px] border border-line-soft bg-paper-light/60 text-ink-soft dark:text-ink-faint hover:text-ink dark:hover:text-ink-faint hover:border-line-strong shadow-stamp transition"
                         aria-label="Alternar tema">
                     <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>

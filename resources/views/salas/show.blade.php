@@ -136,7 +136,7 @@
                                                 <label class="relative cursor-pointer group">
                                                     <input type="checkbox" name="dias[]" value="{{ $valor }}"
                                                            class="peer sr-only" x-model="diasSel">
-                                                    <span class="block border border-line-strong bg-paper-light px-3 py-3 text-center text-sm text-ink-soft rounded-[3px] transition-colors peer-checked:bg-folio peer-checked:text-paper-light peer-checked:border-folio peer-focus-visible:ring-2 peer-focus-visible:ring-brass group-hover:border-brass/60">
+                                                    <span class="block border border-line-strong bg-paper-light px-3 py-3 text-center text-sm text-ink-soft rounded-[3px] transition-colors dark:!text-ink-faint peer-checked:bg-folio peer-checked:text-paper-light peer-checked:border-folio dark:peer-checked:text-paper-light peer-focus-visible:ring-2 peer-focus-visible:ring-brass group-hover:border-brass/60">
                                                         {{ $rotulo }}
                                                     </span>
                                                 </label>
@@ -158,7 +158,7 @@
                                                     <input type="checkbox" name="blocos[]" value="{{ $bloco }}"
                                                            class="peer sr-only" x-model="blocosSel"
                                                            :disabled="indisponivel('{{ $bloco }}')">
-                                                    <span class="block border border-line-strong bg-paper-light px-2 py-2.5 text-center text-[13px] font-mono text-ink-soft rounded-[3px] transition-colors peer-checked:bg-leather peer-checked:text-paper-light peer-checked:border-leather peer-disabled:opacity-35 peer-disabled:cursor-not-allowed peer-focus-visible:ring-2 peer-focus-visible:ring-brass group-hover:border-brass/60">
+                                                    <span class="block border border-line-strong bg-paper-light px-2 py-2.5 text-center text-[13px] font-mono text-ink-soft rounded-[3px] transition-colors dark:!text-ink-faint peer-checked:bg-leather peer-checked:text-paper-light peer-checked:border-leather dark:peer-checked:text-paper-light peer-disabled:opacity-35 peer-disabled:cursor-not-allowed peer-focus-visible:ring-2 peer-focus-visible:ring-brass group-hover:border-brass/60">
                                                         {{ $bloco }}
                                                     </span>
                                                 </label>
@@ -170,7 +170,7 @@
                                         <p class="text-xs text-ink-faint">
                                             Confirme seus horários com atenção — reservas são individuais.
                                         </p>
-                                        <button type="submit" class="btn btn-primary" :disabled="!limiteOk"
+                                        <button type="submit" class="btn btn-primary dark:!text-ink-faint" :disabled="!limiteOk"
                                                 :class="limiteOk ? '' : 'opacity-40 cursor-not-allowed'">
                                             Reservar
                                         </button>
@@ -182,7 +182,7 @@
                         <div class="card paper-grain">
                             <div class="p-8 text-center">
                                 <p class="text-ink-soft mb-4">Você precisa estar logado para reservar uma sala de estudo.</p>
-                                <a href="{{ route('login') }}" class="btn btn-primary">Entrar na biblioteca</a>
+                                <a href="{{ route('login') }}" class="btn btn-primary dark:!text-ink-faint">Entrar na biblioteca</a>
                             </div>
                         </div>
                     @endauth
