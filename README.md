@@ -18,6 +18,7 @@
 - [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
 - [Regras de Negócio](#-regras-de-negócio)
 - [Painel Administrativo](#-painel-administrativo)
+- [API REST (v1)](#-api-rest-v1)
 - [Testes](#-testes)
 - [Timezone](#-timezone)
 - [Documentação Técnica](#-documentação-técnica)
@@ -317,6 +318,145 @@ Livros e salas cadastrados pelo painel administrativo são marcados como **tempo
 - 🔒 Todas as rotas `/admin/*` exigem autenticação **e** privilégio de administrador
 - 🚫 Usuários comuns recebem erro **403 Forbidden** ao tentar acessar o painel
 - ✅ Middleware `EhAdmin` verifica a flag `is_admin` em cada requisição
+
+---
+
+## 🔌 API REST (v1)
+
+A Webblioteca expõe uma API somente leitura em `/api/v1`, pensada para ser consumida por um serviço externo via polling (ex: um dashboard mostrando atividades recentes).
+
+### Autenticação
+
+Todas as rotas protegidas exigem um token Sanctum com a ability `activities:read`, enviado no header:
+
+```bash
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+### Emitindo um token
+
+```bash
+./vendor/bin/sail artisan activities:issue-token "nome-do-token" --email=admin@admin.com
+```
+
+O token é exibido apenas uma vez no momento da criação. **Copie e guarde em segurança.**
+
+### Endpoints
+
+#### `GET /api/v1/health`
+
+Não requer autenticação. Retorna o status da aplicação e da conexão com o banco.
+
+**Resposta:**
+```json
+{
+  "status": "ok",
+  "database": "ok",
+  "timestamp": "2026-10-01T16:30:00-03:00"
+}
+```
+
+#### `GET /api/v1/activities`
+
+Requer autenticação com ability `activities:read`. Lista o log de atividades do sistema (criação de livros/salas, empréstimos, devoluções, reservas e cancelamentos), com paginação por cursor.
+
+**Parâmetros de query (opcionais):**
+
+| Parâmetro | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `since_id` | integer | — | Retorna apenas atividades com `id` maior que o informado — usado para polling incremental |
+| `limit` | integer | 20 | Quantidade máxima de registros (máximo: 100) |
+
+**Exemplo:**
+```bash
+curl "http://localhost:8678/api/v1/activities?since_id=42&limit=10" \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+**Resposta (200 OK):**
+```json
+{
+  "data": [
+    {
+      "id": 43,
+      "type": "emprestimo.criado",
+      "entity_type": "App\\Models\\Emprestimo",
+      "entity_id": 7,
+      "summary": {
+        "livro": "Dom Casmurro",
+        "exemplar": "LIV-001-1",
+        "data_prevista_devolucao": "2026-10-08"
+      },
+      "actor": {
+        "id": 3,
+        "name": "Administrador"
+      },
+      "created_at": "2026-10-01T16:30:00-03:00"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "next_since_id": 43
+  }
+}
+```
+
+**Como usar para polling:**
+
+1. Faça a primeira chamada sem `since_id`
+2. Guarde o valor de `next_since_id` retornado
+3. Na próxima chamada, passe `since_id=valor_anterior`
+4. Repita o processo
+
+Isso garante que você sempre receba apenas as atividades novas desde a última consulta.
+
+### Tipos de evento registrados
+
+| Tipo | Ator | Descrição |
+|---|---|---|
+| `livro.criado` | Usuário (admin) | Livro adicionado ao catálogo |
+| `livro.expirado` | Sistema | Livro temporário removido automaticamente |
+| `sala.criada` | Usuário (admin) | Sala de estudo adicionada |
+| `sala.expirada` | Sistema | Sala temporária removida automaticamente |
+| `emprestimo.criado` | Usuário | Livro emprestado |
+| `emprestimo.devolvido` | Usuário | Livro devolvido |
+| `reserva.criada` | Usuário | Sala reservada |
+| `reserva.cancelada` | Usuário | Reserva cancelada pelo usuário |
+| `reserva.expirada` | Sistema | Reserva expirada automaticamente |
+
+### Formato de erro
+
+Todas as rotas `/api/*` retornam erros no formato JSON:
+
+```json
+{
+  "error": {
+    "message": "Descrição do erro",
+    "code": "NomeDaExcecao"
+  }
+}
+```
+
+**Códigos de status HTTP:**
+
+| Status | Significado |
+|--------|-----------|
+| `200` | Sucesso |
+| `401` | Não autenticado (token ausente ou inválido) |
+| `403` | Não autorizado (token sem ability `activities:read`) |
+| `422` | Validação falhou (parâmetros inválidos) |
+| `500` | Erro interno do servidor |
+
+### Rate Limiting
+
+- **Limite:** 60 requisições por minuto
+- **Por:** token (usuário autenticado) ou IP (requisições sem autenticação)
+- **Headers de resposta:**
+  - `X-RateLimit-Limit`: limite total
+  - `X-RateLimit-Remaining`: requisições restantes
+  - `X-RateLimit-Reset`: timestamp Unix de quando o limite é resetado
+
+Se exceder o limite, receberá status `429 Too Many Requests`.
 
 ---
 

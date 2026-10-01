@@ -3,6 +3,8 @@
 .env
 .env.backup
 .env.production
+.env.local
+.env.*.local
 .phpactor.json
 .phpunit.result.cache
 /.codex
@@ -25,4 +27,50 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
-CLAUDE.md
+CLAUDE.md.phpunit.result.cache
+
+# Arquivos de IA e LLM
+.claude/
+.anthropic/
+.openai/
+claude_cache/
+*.agentic
+
+# Documentação privada e planejamento
+/docs/private/
+/docs/internal/
+PLANEJAMENTO.md
+NOTAS-INTERNAS.md
+ROADMAP-PRIVADO.md
+
+# Tokens e credenciais de API
+.env.tokens
+.env.secrets
+tokens/
+secrets/
+*.token
+*.key
+*.pem
+
+# Configuração local de desenvolvedor
+.vscode/settings.json
+.idea/
+*.sublime-workspace
+.DS_Store
+
+# Arquivos temporários
+*.swp
+*.swo
+*~
+.tmp/
+tmp/
+
+# Cache de desenvolvimento
+.cache/
+dist/
+build/
+
+# Testes e cobertura (se usar localmente)
+/coverage
+.nyc_output
+*.lcov
