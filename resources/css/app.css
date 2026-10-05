@@ -39,7 +39,7 @@
     --color-paper: 58 52 40;         /* #3A3428 - Marrom claro */
     --color-paper-alt: 67 61 48;     /* #433D30 */
     --color-paper-card: 75 68 53;    /* #4B4435 */
-    --color-paper-light: 244 232 204; /* creme claro (texto de livros + superfícies de input) */
+    --color-paper-light: 85 77 60;   /* #554D3C - Superfície elevada escura para inputs e cards */
 
     /* Textos com alto contraste */
     --color-ink: 245 240 229;        /* #F5F0E5 - Branco cremoso */
@@ -161,26 +161,47 @@
         @apply inline-flex items-center justify-center gap-2 px-4 py-2 font-display text-sm font-semibold tracking-wide uppercase;
         border-radius: 3px;
         border: 1px solid transparent;
+        min-height: 44px;
         transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
         cursor: pointer;
         text-decoration: none;
         line-height: 1.25;
     }
     .btn-primary {
-        @apply bg-leather text-paper-light border-leather-deep shadow-press;
+        @apply bg-leather border-leather-deep shadow-press;
+        color: #FDF8EE;
         letter-spacing: .045em;
     }
     .btn-primary:hover {
         @apply bg-leather-deep;
+        color: #FDF8EE;
     }
     .btn-primary:active {
         box-shadow: inset 0 2px 4px rgba(46, 16, 10, .4);
+    }
+
+    /* Dark mode: texto escuro sobre couro luminoso */
+    .dark .btn-primary {
+        @apply bg-leather border-leather-deep font-bold;
+        color: #261E14;
+    }
+    .dark .btn-primary:hover {
+        @apply bg-leather-light;
+        color: #261E14;
     }
     .btn-outline {
         @apply bg-transparent text-ink border-line-strong;
     }
     .btn-outline:hover {
         @apply bg-paper-light border-ink;
+    }
+
+    /* Dark mode: botão outline mais legível */
+    .dark .btn-outline {
+        @apply border-line-strong text-ink;
+    }
+    .dark .btn-outline:hover {
+        @apply bg-paper-light border-ink text-ink;
     }
     .btn-green {
         @apply bg-folio text-paper-light border-folio-deep shadow-press;
@@ -189,11 +210,27 @@
     .btn-green:hover {
         @apply bg-folio-deep;
     }
+
+    /* Dark mode: botão verde mais legível */
+    .dark .btn-green {
+        @apply text-[#1A281E] bg-folio border-folio-deep font-bold;
+    }
+    .dark .btn-green:hover {
+        @apply bg-folio-light text-[#1A281E];
+    }
     .btn-ghost {
         @apply bg-transparent text-ink-soft;
     }
     .btn-ghost:hover {
         @apply text-ink bg-paper-alt;
+    }
+
+    /* Dark mode: botão ghost mais legível */
+    .dark .btn-ghost {
+        @apply text-ink-soft;
+    }
+    .dark .btn-ghost:hover {
+        @apply text-ink bg-paper-card;
     }
     a.btn:focus-visible,
     button.btn:focus-visible,
@@ -279,11 +316,32 @@
         @apply border-brass outline-none;
         box-shadow: 0 0 0 3px rgba(169, 127, 47, .18);
     }
+
+    /* Dark mode: input com contraste suficiente */
+    .dark .input-paper {
+        @apply bg-paper-alt text-ink;
+        border-color: rgb(var(--color-line));
+    }
+    .dark .input-paper:focus {
+        @apply border-brass;
+        box-shadow: 0 0 0 3px rgba(242, 199, 134, .25);
+    }
+    .dark .input-paper::placeholder {
+        @apply text-ink-faint;
+    }
     .checkbox-paper {
         @apply rounded-[3px] border-line-strong text-leather shadow-stamp;
     }
     .checkbox-paper:focus {
         @apply ring-brass;
+    }
+
+    /* Dark mode: checkbox mais visível */
+    .dark .checkbox-paper {
+        @apply border-line-strong text-brass accent-brass;
+    }
+    .dark .checkbox-paper:focus {
+        @apply ring-brass ring-offset-2;
     }
 
     /* ——— Tabela de inventário (linhas tracejadas de cadastro) ——— */

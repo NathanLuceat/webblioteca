@@ -59,7 +59,7 @@
                                     </dl>
 
                                     <div class="mt-4 pt-4 border-t border-line-soft">
-                                        <a href="{{ route('salas.show', $sala->id) }}" class="btn btn-outline w-full text-xs dark:!text-ink-faint">
+                                        <a href="{{ route('salas.show', $sala->id) }}" class="btn btn-outline w-full text-xs min-h-[44px]">
                                             Reservar horário
                                         </a>
                                     </div>
