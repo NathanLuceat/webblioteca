@@ -42,7 +42,7 @@
                     <x-application-logo class="h-11 w-auto drop-shadow" />
                     <div>
                         <p class="font-display text-2xl leading-none tracking-tight text-paper-light">We<span class="italic text-brass-light">BB</span>lioteca</p>
-                        <p class="mt-1 text-[11px] uppercase tracking-[0.28em] text-paper-light/60">Biblioteca Virtual</p>
+                        <p class="mt-1 text-[11px] tracking-[0.28em] text-paper-light/60">Biblioteca Virtual</p>
                     </div>
                 </div>
 
@@ -52,13 +52,12 @@
                     <p class="font-display italic text-2xl leading-relaxed text-paper-light/90">
                         “Um bom livro é um amigo que<br/>nunca nos abandona.”
                     </p>
-                    <p class="mt-4 text-xs uppercase tracking-[0.22em] text-paper-light/55">— para os velhos e novos leitores</p>
+                    <p class="mt-4 text-xs tracking-[0.22em] text-paper-light/55">— para os velhos e novos leitores</p>
                 </div>
 
                 <!-- Rodapé do painel -->
                 <div class="relative flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-paper-light/45">
                     <span>Est. MMXXIV</span>
-                    <span class="text-brass-light/75">❦ papel · couro · latão</span>
                 </div>
             </aside>
 
@@ -68,6 +67,34 @@
                 <div class="flex lg:hidden items-center gap-2.5 mb-8 justify-center">
                     <x-application-logo class="h-9 w-auto text-leather" />
                     <span class="font-display text-xl text-ink">We<span class="italic text-leather">BB</span>lioteca</span>
+                </div>
+
+                <!-- Botão de tema (Light/Dark) antes do formulário -->
+                <div class="flex justify-end mb-5">
+                    <button type="button"
+                            x-data="{
+                                dark: document.documentElement.classList.contains('dark'),
+                                toggle() {
+                                    this.dark = !this.dark;
+                                    if (this.dark) {
+                                        document.documentElement.classList.add('dark');
+                                        localStorage.theme = 'dark';
+                                    } else {
+                                        document.documentElement.classList.remove('dark');
+                                        localStorage.theme = 'light';
+                                    }
+                                }
+                            }"
+                            @click="toggle()"
+                            class="p-2 rounded-[3px] border border-line-soft bg-paper-light/70 text-ink-soft hover:text-ink hover:border-line-strong shadow-stamp transition dark:bg-paper-light/60 dark:text-ink-faint dark:hover:text-ink dark:hover:border-line-strong"
+                            aria-label="Alternar tema">
+                        <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <svg x-show="dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
                 </div>
 
                 <div class="w-full max-w-md mx-auto">
@@ -85,7 +112,7 @@
                     </div>
 
                     <p class="mt-6 text-center text-xs text-ink-faint">
-                        Dúvidas? Fale com o bibliotecário <a href="mailto:biblioteca@example.test" class="text-leather hover:text-leather-deep underline underline-offset-2">biblioteca@example.test</a>
+                        Dúvidas? Fale com o bibliotecário <a href="tel:+5535988933911" class="text-leather hover:text-leather-deep underline underline-offset-2">(35) 988933911</a>
                     </p>
                 </div>
             </div>
