@@ -38,7 +38,7 @@
                         </span>
                     </a>
 
-                    <nav class="flex items-center gap-3">
+                    <nav class="hidden sm:flex items-center gap-3">
                         @auth
                             <a href="{{ route('dashboard') }}" class="btn btn-primary text-xs">Minha estante</a>
                         @else
@@ -59,8 +59,7 @@
                             <span class="italic text-leather">sem precisar</span> pousar o livro
                         </h1>
                         <p class="mt-6 text-lg text-ink-soft max-w-xl leading-relaxed">
-                            Catálogo completo de obras, empréstimo em 7 dias e salas de estudo
-                            silenciosas — tudo organizado como uma boa ficha de biblioteca.
+                            A sensação do papel, a um clique de distância.
                         </p>
                         <div class="mt-8 flex flex-wrap gap-4">
                             @auth

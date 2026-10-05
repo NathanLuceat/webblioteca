@@ -41,22 +41,22 @@
                 <div class="relative flex items-start gap-3">
                     <x-application-logo class="h-11 w-auto drop-shadow" />
                     <div>
-                        <p class="font-display text-2xl leading-none tracking-tight text-paper-light">We<span class="italic text-brass-light">BB</span>lioteca</p>
-                        <p class="mt-1 text-[11px] tracking-[0.28em] text-paper-light/60">Biblioteca Virtual</p>
+                        <p class="font-display text-2xl leading-none tracking-tight text-[#FDFAF2]">We<span class="italic text-[#C9A45C]">BB</span>lioteca</p>
+                        <p class="mt-1 text-[11px] tracking-[0.28em] text-[#FDFAF2]/60">Biblioteca Virtual</p>
                     </div>
                 </div>
 
                 <!-- Meio: citação -->
                 <div class="relative my-8">
                     <div class="w-10 h-px bg-brass-light/70 mb-6"></div>
-                    <p class="font-display italic text-2xl leading-relaxed text-paper-light/90">
+                    <p class="font-display italic text-2xl leading-relaxed text-[#FDFAF2]/90">
                         “Um bom livro é um amigo que<br/>nunca nos abandona.”
                     </p>
-                    <p class="mt-4 text-xs tracking-[0.22em] text-paper-light/55">— para os velhos e novos leitores</p>
+                    <p class="mt-4 text-xs tracking-[0.22em] text-[#FDFAF2]/55">— para os velhos e novos leitores</p>
                 </div>
 
                 <!-- Rodapé do painel -->
-                <div class="relative flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-paper-light/45">
+                <div class="relative flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-[#FDFAF2]/45">
                     <span>Est. MMXXIV</span>
                 </div>
             </aside>
