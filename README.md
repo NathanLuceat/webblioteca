@@ -4,6 +4,8 @@
 
 **Webblioteca** é um projeto de portfólio desenvolvido em Laravel que demonstra modelagem relacional de banco de dados, autenticação de usuários, e lógica de negócio para gerenciamento de biblioteca. O sistema oferece duas funcionalidades principais: controle de empréstimos de exemplares físicos e agendamento de salas de estudo.
 
+> 🌐 Link em funcionamento: https://webblioteca.laravel.cloud
+
 ---
 
 ## 📋 Índice
