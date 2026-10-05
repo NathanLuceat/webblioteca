@@ -29,6 +29,29 @@
                         <div class="text-2xl">🗓️</div>
                         <h2 class="font-display text-lg font-semibold text-ink mt-3">Ver reservas</h2>
                         <p class="text-ink-soft text-sm mt-1">Acompanhe todas as reservas de todos os usuários.</p>
+
+                        <div class="mt-4">
+                            <p class="label-overline mb-2">Últimos logs de reserva</p>
+                            @if($recentReservationActivities->isEmpty())
+                                <p class="text-ink-soft text-sm">Nenhuma reserva recente.</p>
+                            @else
+                                <div class="space-y-2">
+                                    @foreach($recentReservationActivities as $activity)
+                                        <div class="text-sm text-ink-soft flex items-start gap-2">
+                                            <span class="mt-1 w-1.5 h-1.5 rounded-full bg-brass-deep"></span>
+                                            <div class="min-w-0">
+                                                <p class="text-ink font-medium">
+                                                    {{ data_get($activity->summary, 'sala') }}
+                                                </p>
+                                                <p class="text-xs text-ink-soft">
+                                                    {{ data_get($activity->summary, 'data') }} · {{ data_get($activity->summary, 'hora_inicio') }} — {{ data_get($activity->summary, 'hora_fim') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                     </a>
                 </div>
             </div>

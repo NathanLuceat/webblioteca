@@ -38,13 +38,13 @@
                 <div class="absolute inset-[22px] border border-paper-light/10 pointer-events-none"></div>
 
                 <!-- Topo: marca -->
-                <div class="relative flex items-start gap-3">
+                <a href="{{ url('/') }}" class="inline-flex relative flex items-start gap-3 min-h-[44px] px-2 focus:outline-none focus:ring-2 focus:ring-brass/40 rounded-[3px]">
                     <x-application-logo class="h-11 w-auto drop-shadow" />
                     <div>
                         <p class="font-display text-2xl leading-none tracking-tight text-[#FDFAF2]">We<span class="italic text-[#C9A45C]">BB</span>lioteca</p>
                         <p class="mt-1 text-[11px] tracking-[0.28em] text-[#FDFAF2]/60">Biblioteca Virtual</p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Meio: citação -->
                 <div class="relative my-8">
@@ -52,7 +52,7 @@
                     <p class="font-display italic text-2xl leading-relaxed text-[#FDFAF2]/90">
                         “Um bom livro é um amigo que<br/>nunca nos abandona.”
                     </p>
-                    <p class="mt-4 text-xs tracking-[0.22em] text-[#FDFAF2]/55">— para os velhos e novos leitores</p>
+                    <p class="mt-4 text-xs tracking-[0.22em] text-[#FDFAF2]/55">para os velhos e novos leitores</p>
                 </div>
 
                 <!-- Rodapé do painel -->
@@ -64,10 +64,10 @@
             <!-- Coluna de papel (formulário) -->
             <div class="lg:col-span-7 xl:col-span-8 relative flex flex-col justify-center min-h-screen px-6 py-12 sm:px-12 lg:px-20">
                 <!-- Marca no mobile -->
-                <div class="flex lg:hidden items-center gap-2.5 mb-8 justify-center">
+                <a href="{{ url('/') }}" class="flex lg:hidden items-center gap-2.5 mb-8 justify-center min-h-[44px] px-2 rounded-[3px] focus:outline-none focus:ring-2 focus:ring-brass/40">
                     <x-application-logo class="h-9 w-auto text-leather" />
                     <span class="font-display text-xl text-ink">We<span class="italic text-leather">BB</span>lioteca</span>
-                </div>
+                </a>
 
                 <!-- Botão de tema (Light/Dark) antes do formulário -->
                 <div class="flex justify-end mb-5">

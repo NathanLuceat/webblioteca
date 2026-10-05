@@ -38,14 +38,41 @@
                         </span>
                     </a>
 
-                    <nav class="hidden sm:flex items-center gap-3">
-                        @auth
-                            <a href="{{ route('dashboard') }}" class="btn btn-primary text-xs">Minha estante</a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-outline text-xs">Entrar</a>
-                            <a href="{{ route('register') }}" class="btn btn-primary text-xs">Cadastrar-se</a>
-                        @endauth
-                    </nav>
+                    <div class="flex items-center gap-3">
+                        <button type="button"
+                                x-data="{
+                                    dark: document.documentElement.classList.contains('dark'),
+                                    toggle() {
+                                        this.dark = !this.dark;
+                                        if (this.dark) {
+                                            document.documentElement.classList.add('dark');
+                                            localStorage.theme = 'dark';
+                                        } else {
+                                            document.documentElement.classList.remove('dark');
+                                            localStorage.theme = 'light';
+                                        }
+                                    }
+                                }"
+                                @click="toggle()"
+                                class="flex items-center justify-center min-h-[44px] min-w-[44px] p-2 rounded-[3px] border border-line-soft bg-paper-light/85 text-ink-soft hover:text-ink hover:border-line-strong shadow-stamp transition"
+                                aria-label="Alternar tema">
+                            <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            </svg>
+                            <svg x-show="dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </button>
+
+                        <nav class="hidden sm:flex items-center gap-3">
+                            @auth
+                                <a href="{{ route('dashboard') }}" class="btn btn-primary text-xs">Minha estante</a>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-outline text-xs">Entrar</a>
+                                <a href="{{ route('register') }}" class="btn btn-primary text-xs">Cadastrar-se</a>
+                            @endauth
+                        </nav>
+                    </div>
                 </div>
             </header>
 
@@ -128,8 +155,7 @@
                             </div>
                             <h3 class="font-display text-xl font-semibold text-ink mb-2">Empréstimo de obras</h3>
                             <p class="text-sm text-ink-soft leading-relaxed">
-                                Escolha um exemplar disponível, leve para casa por 7 dias e devolva
-                                quando terminar — como uma verdadeira ficha de empréstimo.
+                                Escolha um exemplar disponível, leve para casa por 7 dias e devolva quando terminar. Assim, tudo fica com a cara de uma ficha de empréstimo.
                             </p>
                         </div>
                     </div>

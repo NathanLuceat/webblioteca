@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Livro;
 use App\Models\Sala;
 use App\Models\ReservaSala;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function painel()
     {
-        return view('admin.painel');
+        $recentReservationActivities = Activity::query()
+            ->where('type', 'reserva.criada')
+            ->orderByDesc('id')
+            ->limit(5)
+            ->get();
+
+        return view('admin.painel', [
+            'recentReservationActivities' => $recentReservationActivities,
+        ]);
     }
 
     public function livrosForm()
